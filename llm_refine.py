@@ -8,7 +8,7 @@ from cssa.utils import get_script, read_json_file
 
 if __name__ == "__main__":
     model_path = "/data/xli/speech-agent/ChatTTS/asset/speaker_emb"
-    output_dir = "baseline_outputs"
+    output_dir = "llm_refine_outputs"
     script_path = "example_data.json"
     processor = ChatTTS_agent(model_path, output_dir)
     llm_bot = zhipullm("glm-4")
@@ -18,4 +18,6 @@ if __name__ == "__main__":
         res = llm_bot.predict(CHINESE_REFINE_PROMPT.format(text=data["conversation"]))
         texts = get_text_inside_tag(res, "speaker")
         prompts = get_text_inside_tag(res, "prompt")
-        processor.run_batch(texts, speakers[i], prompts, f"conversation{i}.wav")
+        processor.run_batch(
+            texts, speakers[i], prompts, f"conversation{i}.wav", refine_skip=True
+        )
