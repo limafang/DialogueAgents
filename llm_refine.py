@@ -10,21 +10,12 @@ if __name__ == "__main__":
     model_path = "/data/xli/speech-agent/ChatTTS/asset/speaker_emb"
     output_dir = "baseline_outputs"
     script_path = "example_data.json"
+    processor = ChatTTS_agent(model_path, output_dir)
     llm_bot = zhipullm("glm-4")
+    text_batches, speakers = get_script(script_path)
     data = read_json_file(script_path)
-    for i in data["scripts"]:
-        res = llm_bot.predict(CHINESE_REFINE_PROMPT.format(text=i["conversation"]))
-        print(res)
-        text = get_text_inside_tag(res, "speaker")
-        print(text)
-        prompt = get_text_inside_tag(res, "prompt")
-        print(prompt)
-    # text_batches, speakers = get_script(script_path)
-
-    # processor = ChatTTS_agent(model_path, output_dir)
-    # for i, data in enumerate(text_batches):
-    #     print(data)
-    #     prompts_len = len(data)
-    #     prompts = ["[oral_2][laugh_0][break_6]" for _ in range(prompts_len)]
-    #     print(prompts)
-    #     processor.run_batch(data, speakers[i], prompts, f"conversation{i}.wav")
+    for i, data in enumerate(data["scripts"]):
+        res = llm_bot.predict(CHINESE_REFINE_PROMPT.format(text=data["conversation"]))
+        texts = get_text_inside_tag(res, "speaker")
+        prompts = get_text_inside_tag(res, "prompt")
+        processor.run_batch(texts, speakers[i], prompts, f"conversation{i}.wav")

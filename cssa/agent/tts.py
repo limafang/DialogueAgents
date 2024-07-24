@@ -51,13 +51,18 @@ class ChatTTS_agent:
     def create_refine_text_params(self, prompt):
         return ChatTTS.Chat.RefineTextParams(prompt=prompt)
 
-    def process_texts(self, texts, params_refine_text, params_infer_code):
-        refined_texts = self.chat.infer(
-            texts,
-            params_refine_text=params_refine_text,
-            params_infer_code=params_infer_code,
-            refine_text_only=True,
-        )
+    def process_texts(
+        self, texts, params_refine_text, params_infer_code, is_skip=False
+    ):
+        if is_skip:
+            refined_texts = texts
+        else:
+            refined_texts = self.chat.infer(
+                texts,
+                params_refine_text=params_refine_text,
+                params_infer_code=params_infer_code,
+                refine_text_only=True,
+            )
         return refined_texts
 
     def generate_wavs(self, refined_texts, params_refine_text, params_infer_code):
@@ -115,6 +120,7 @@ class ChatTTS_agent:
         speaker_names: list,
         prompts: list,
         output_filename: str,
+        refine_skip: bool,
     ):
         """
         Args:
@@ -130,7 +136,7 @@ class ChatTTS_agent:
             params_infer_code = self.create_infer_code_params(spk_emb_str)
             params_refine_text = self.create_refine_text_params(prompt)
             refined_texts = self.process_texts(
-                texts, params_refine_text, params_infer_code
+                texts, params_refine_text, params_infer_code, refine_skip
             )
             refined_texts_batches.append(
                 (refined_texts, params_refine_text, params_infer_code)
