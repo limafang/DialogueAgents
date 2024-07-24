@@ -1,24 +1,38 @@
 EN_REFINE_PROMPT = """
 ## Role
-## Role
-You are now tasked with acting as a text-to-speech model.
+Now you need to play the role of a text-to-speech model.
+
 ## Goal
-You will be responsible for a RefineText task, which involves outputting the given text in a conversational manner.
-Ensure that your response is suitable for a text-to-speech task. You need to consider appropriate sentence structures and the flow between two speakers.
-*You may add the following special markers at appropriate places to enhance the text-to-speech effect*.
-The special markers are as follows:
-[laugh]: indicates laughter
-[uv_break]: indicates a short pause
-[lbreak]: indicates a longer pause
-For different speakers, please use HTML tags like <speaker1> to enclose the responses.
+You will be responsible for the RefineText task, which is to output the given text in a conversational manner.
+Ensure your answer is suitable for text-to-speech tasks, you need to consider the appropriate arrangement of word order and consider the continuity between two people's dialogues.
+You can add the following special markers at appropriate positions to help enhance the text-to-speech effect.
+Special markers are as follows:
+[laugh]: represents laughter
+[uv_break]: represents a brief pause
+[lbreak]: represents a longer pause
+
+**For different speakers, please wrap the return with <speaker> such html symbols.**
+**You need to follow each speaker's output with <prompt></prompt>**, its content is as follows:
+'[oral_2][laugh_0][break_6]'
+Where:
+
+oral_(0-9): Represents the degree of informality of the speech. A higher value results in a more natural tone; a lower value results in a more monotonous tone.
+laugh_(0-2): This parameter is used to control laughter. A higher value results in more noticeable laughter, while a lower value or no laughter indicates a serious or neutral emotion.
+break_(0-7): This parameter indicates the pauses in the speech. A higher value means more pauses in the sentence, used to express hesitation, contemplation, or a heavy emotional state; a lower value indicates smooth speech with few pauses.
+
 ## Example
-Original text: Amy asked him happily, "What type of food do you like?" Bob replied, "I like cake."
-Refined text: <speaker1>What type of food do you like[uv_break] best?[laugh][lbreak]</speaker1><prompts1></prompts1><speaker2>I like[uv_break] cake.</speaker2><prompts2></prompts2>
-## Given text
+Original text: Amy happily asked him, "What kind of food do you like, Bob?" Bob replied, "I like cake."
+
+Optimized text:
+<speaker>What kind of food do you like[uv_break]the most[laugh][lbreak]</speaker><prompt>[oral_8][laugh_1][break_2]</prompt><speaker>I like[uv_break]cake</speaker><prompt>[oral_8][laugh_0][break_4]</prompt>
+
+## Given Text
 {text}
+
 ## Task
 Optimize the given text.
-Don't use abbreviations like "that's" and "can't", use "that is" and "can not".
+Do not return any other words.
+The modified sentences should not contain punctuation other than commas and periods.
 """
 
 CHINESE_REFINE_PROMPT = """
@@ -32,10 +46,20 @@ CHINESE_REFINE_PROMPT = """
 [laugh]：代表笑声
 [uv_break]：代表短暂的停顿
 [lbreak]：代表较长的停顿
-对于不同的说话人请用<speaker1>这样的html符号包裹返回
+
+**对于不同的说话人请用<speaker>这样的html符号包裹返回**
+
+**你需要在每个speaker输出完后接上<prompt></prompt>**，它的内容如下：
+'[oral_2][laugh_0][break_6]'
+其中 
+
+oral_(0-9)：代表控制这句话的口语程度。数值越高，语调更加自然；数值较低语调较为单调。
+laugh_(0-2)：这个参数用来控制笑声的。数值越高，笑声越明显，数值低或没有笑声则表示严肃或中性的情感。
+break_(0-7)：这个参数表示语音中的停顿。数值越高，句子中的停顿越多，用于表达犹豫、思考或感情沉重的状态；数值较低则表示说话流畅，没有太多停顿
+
 ## 示例
 原文：Amy高兴地问他：“你喜欢什么类型的食物，bob 回答说，我喜欢蛋糕”
-优化后的文本：<speaker1>你最喜欢什么[uv_break]类型食物啊[laugh][lbreak]</speaker1><speaker2>我喜欢[uv_break]蛋糕</speaker2>
+优化后的文本：<speaker>你最喜欢什么[uv_break]类型食物啊[laugh][lbreak]</speaker><prompt>[oral_8][laugh_1][break_2]</prompt><speaker>我喜欢[uv_break]蛋糕</speaker><prompt>[oral_8][laugh_0][break_4]</prompt>
 ## 给定文本
 {text}
 ## 任务

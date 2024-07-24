@@ -109,7 +109,20 @@ class ChatTTS_agent:
         )
         print(f"Concatenated audio saved at {output_path}")
 
-    def run_batch(self, text_batches, speaker_names, prompts, output_filename):
+    def run_batch(
+        self,
+        text_batches: list,
+        speaker_names: list,
+        prompts: list,
+        output_filename: str,
+    ):
+        """
+        Args:
+            text_batches (list): _description_
+            speaker_names (list): _description_
+            prompts (list): _description_
+            output_filename (str): _description_
+        """
         all_filenames = []
         refined_texts_batches = []
         for texts, speaker_name, prompt in zip(text_batches, speaker_names, prompts):
