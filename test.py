@@ -1,5 +1,6 @@
-from cssa.utils import read_json_file, get_script
+from cssa.llm.qwen_audio import AudioRefinementBot
+from cssa.prompt import *
 
-text_batches, speakers = get_script("example_data.json")
-print(text_batches)
-print(speakers)
+audio_bot = AudioRefinementBot("qwen-audio-turbo")
+audio_path = "baseline_outputs/conversation0.wav"
+res = audio_bot.evaluate_audio(audio_path, EVAL_AUDIO)
