@@ -1,5 +1,5 @@
 from cssa.agent.tts import ChatTTS_agent
-from cssa.utils import get_script
+from cssa.utils import get_script, replace_
 
 
 if __name__ == "__main__":
@@ -11,7 +11,10 @@ if __name__ == "__main__":
 
     for i, data in enumerate(text_batches):
         print(data)
+        texts = [replace_(j) for j in data]
         prompts_len = len(data)
         prompts = ["[oral_2][laugh_0][break_6]" for _ in range(prompts_len)]
         print(prompts)
-        processor.run_batch(data, speakers[i], prompts, f"conversation{i}.wav")
+        processor.run_batch(
+            data, speakers[i], prompts, f"conversation{i}.wav", refine_skip=False
+        )

@@ -47,3 +47,7 @@ def get_script(file_path):
         text_batches.append(text)
         speakers.append(speaker)
     return text_batches, speakers
+
+
+def replace_(text):
+    return re.sub(r"[?！]", ".", text)
