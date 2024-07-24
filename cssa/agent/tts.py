@@ -6,23 +6,9 @@ import numpy as np
 import pybase16384 as b14
 import ChatTTS
 import subprocess
-from cssa.prompt import *
-from cssa.llm.zhipu import zhipubot
-from cssa.utils import get_text_inside_tag
 
 
-def llm_refine(text, json_file):
-    response = zhipubot.predict(EN_REFINE_PROMPT.format(text))
-    print(response)
-    speaker_1 = get_text_inside_tag(response, "speaker1")
-    speaker_2 = get_text_inside_tag(response, "speaker2")
-    prompts_1 = get_text_inside_tag(response, "prompts1")
-    prompts_2 = get_text_inside_tag(response, "prompts2")
-
-    return text_batches
-
-
-class ChatTTSProcessor:
+class ChatTTS_agent:
     def __init__(self, model_path, output_dir, device="cpu"):
         self.chat = ChatTTS.Chat()
         self.chat.load(compile=True)
@@ -65,18 +51,13 @@ class ChatTTSProcessor:
     def create_refine_text_params(self, prompt):
         return ChatTTS.Chat.RefineTextParams(prompt=prompt)
 
-    def process_texts(
-        self, texts, params_refine_text, params_infer_code, is_refine=True
-    ):
-        if is_refine:
-            refined_texts = self.chat.infer(
-                texts,
-                params_refine_text=params_refine_text,
-                params_infer_code=params_infer_code,
-                refine_text_only=True,
-            )
-        else:
-            refined_texts = texts
+    def process_texts(self, texts, params_refine_text, params_infer_code):
+        refined_texts = self.chat.infer(
+            texts,
+            params_refine_text=params_refine_text,
+            params_infer_code=params_infer_code,
+            refine_text_only=True,
+        )
         return refined_texts
 
     def generate_wavs(self, refined_texts, params_refine_text, params_infer_code):
@@ -128,9 +109,7 @@ class ChatTTSProcessor:
         )
         print(f"Concatenated audio saved at {output_path}")
 
-    def run_batch(
-        self, text_batches, speaker_names, prompts, output_filename, is_refine
-    ):
+    def run_batch(self, text_batches, speaker_names, prompts, output_filename):
         all_filenames = []
         refined_texts_batches = []
         for texts, speaker_name, prompt in zip(text_batches, speaker_names, prompts):
@@ -138,7 +117,7 @@ class ChatTTSProcessor:
             params_infer_code = self.create_infer_code_params(spk_emb_str)
             params_refine_text = self.create_refine_text_params(prompt)
             refined_texts = self.process_texts(
-                texts, params_refine_text, params_infer_code, is_refine
+                texts, params_refine_text, params_infer_code
             )
             refined_texts_batches.append(
                 (refined_texts, params_refine_text, params_infer_code)
@@ -149,40 +128,10 @@ class ChatTTSProcessor:
                 data[1],
                 data[2],
             )
-            if speaker_filenames[i] == "A":
+            if speaker_names[i] == "A":
                 filename = self.save_wav(wavs[0], f"batch0_text{i}")
                 all_filenames.append(filename)
-            elif speaker_filenames[i] == "B":
+            elif speaker_names[i] == "B":
                 filename = self.save_wav(wavs[0], f"batch1_text{i}")
                 all_filenames.append(filename)
         self.concatenate_wavs(all_filenames, output_filename)
-
-
-if __name__ == "__main__":
-    model_path = "/data/xli/speech-agent/ChatTTS/asset/speaker_emb"
-    output_dir = "baseline_outputs"
-
-    processor = ChatTTSProcessor(model_path, output_dir)
-
-    text_batches = [
-        "he was in jail for fourteen times and they finally deported him",
-        "fourteen times",
-        "yes his family spent over two hundred thousand dollars keeping him here",
-        "and then finally they said no that is it he is out can not even come back to visit",
-        "wow",
-    ]
-    speaker_filenames = [
-        "A",
-        "B",
-        "A",
-        "A",
-        "B",
-    ]
-    prompts = [
-        "[oral_2][laugh_0][break_6]",
-        "[oral_2][laugh_0][break_6]",
-        "[oral_2][laugh_0][break_6]",
-        "[oral_2][laugh_0][break_6]",
-        "[oral_2][laugh_0][break_6]",
-    ]
-    processor.run_batch(text_batches, speaker_filenames, prompts, "conversation.wav")

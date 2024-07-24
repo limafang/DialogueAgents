@@ -13,7 +13,7 @@ The special markers are as follows:
 For different speakers, please use HTML tags like <speaker1> to enclose the responses.
 ## Example
 Original text: Amy asked him happily, "What type of food do you like?" Bob replied, "I like cake."
-Refined text: <speaker1>What type of food do you like[uv_break] best?[laugh][lbreak]</speaker1><speaker2>I like[uv_break] cake.</speaker2>
+Refined text: <speaker1>What type of food do you like[uv_break] best?[laugh][lbreak]</speaker1><prompts1></prompts1><speaker2>I like[uv_break] cake.</speaker2><prompts2></prompts2>
 ## Given text
 {text}
 ## Task

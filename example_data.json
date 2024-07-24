@@ -1,43 +1,154 @@
-{  
-  "scripts": [  
-    {  
-      "id": "1",  
-        "conversation": [  
-            {  
-              "speaker": "A",  
-              "text": "昨晚我接到了失踪报案，我们需要立刻行动。"  
-            },  
-            {  
-              "speaker": "B",  
-              "text": "好的，长官。我们需要先去哪里？"  
-            },
-            {  
-              "speaker": "A",  
-              "text": "昨晚我接到了失踪报案，我们需要立刻行动。"  
-            },
-            {  
-              "speaker": "A",  
-              "text": "昨晚我接到了失踪报案，我们需要立刻行动。"  
-            },
-            {  
-              "speaker": "A",  
-              "text": "昨晚我接到了失踪报案，我们需要立刻行动。"  
-            }
-          ]  
-    }
-    ,
+{
+  "scripts": [
     {
-        "id": "2",  
-        "dialogues": [  
-            {  
-              "speaker": "侦探A",  
-              "text": "昨晚我接到了失踪报案，我们需要立刻行动。"  
-            },  
-            {  
-              "speaker": "助手B",  
-              "text": "好的，长官。我们需要先去哪里？"  
-            }  
-          ]  
+      "id": "1",
+      "conversation": [
+        {
+          "speaker": "A",
+          "text": "你知道吗，小王在这次公司裁员中失去了工作"
+        },
+        {
+          "speaker": "B",
+          "text": "啊？怎么会这样？"
+        },
+        {
+          "speaker": "A",
+          "text": "是的，尽管他工作一直很努力，但公司业绩下滑，不得不裁员。他现在正忙着找工作呢。"
+        },
+        {
+          "speaker": "A",
+          "text": "他说这次经历给他打击很大，但他会努力振作起来的。"
+        },
+        {
+          "speaker": "B",
+          "text": "真是太不幸了，希望他能早日找到新工作"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "conversation": [
+        {
+          "speaker": "A",
+          "text": "告诉你一个好消息，小张的科研项目获得了国家级奖项。"
+        },
+        {
+          "speaker": "B",
+          "text": "真的吗？太厉害了！"
+        },
+        {
+          "speaker": "A",
+          "text": "是啊，他们团队研究了多年的课题终于取得了突破性成果。现在学术界都在关注他们的研究呢。"
+        },
+        {
+          "speaker": "A",
+          "text": "小张说，接下来他们还会继续深入研究，争取更多的成果。"
+        },
+        {
+          "speaker": "B",
+          "text": "真让人激动，为他们感到骄傲！"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "conversation": [
+        {
+          "speaker": "A",
+          "text": "昨天我回家的时候，看到我爸妈在客厅里跳舞，感觉特别温馨。"
+        },
+        {
+          "speaker": "B",
+          "text": "哇，你们家氛围真好！"
+        },
+        {
+          "speaker": "A",
+          "text": "是啊，我爸妈结婚这么多年，感情一直很好。他们还经常一起出去旅游、看电影呢。"
+        },
+        {
+          "speaker": "A",
+          "text": "我也希望将来能有一个这样的家庭，充满欢声笑语。"
+        },
+        {
+          "speaker": "B",
+          "text": "真羡慕你，有这样的家庭氛围。"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "conversation": [
+        {
+          "speaker": "A",
+          "text": "I heard that he was laid off from the company after the project failed for the fourth time."
+        },
+        {
+          "speaker": "B",
+          "text": "Fourth time?"
+        },
+        {
+          "speaker": "A",
+          "text": "Yes, and despite his years of experience, the board decided it was enough. They simply couldn't afford any more setbacks."
+        },
+        {
+          "speaker": "A",
+          "text": "He’s now looking for a new job, but the reputation damage might be too significant."
+        },
+        {
+          "speaker": "B",
+          "text": "That's quite a shock. It must be tough for him."
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "conversation": [
+        {
+          "speaker": "A",
+          "text": "You won't believe it, but she has traveled to 20 different countries in just two years."
+        },
+        {
+          "speaker": "B",
+          "text": "Twenty countries?"
+        },
+        {
+          "speaker": "A",
+          "text": "Yes, and she funded all her travels by working as a digital nomad. It's incredible how she managed to see the world."
+        },
+        {
+          "speaker": "A",
+          "text": "She said the best part is yet to come, as she plans to visit Antarctica next."
+        },
+        {
+          "speaker": "B",
+          "text": "Wow, that sounds like an amazing adventure"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "conversation": [
+        {
+          "speaker": "A",
+          "text": "They broke up after dating for seven years. It was a really tough decision for both of them"
+        },
+        {
+          "speaker": "B",
+          "text": "Seven years?"
+        },
+        {
+          "speaker": "A",
+          "text": "Yes, they were even planning their wedding, but somehow things fell apart. It's really sad."
+        },
+        {
+          "speaker": "A",
+          "text": "She moved to a different city to start fresh. He can't even bear the thought of running into her anymore."
+        },
+        {
+          "speaker": "B",
+          "text": "That's heart-breaking. I can't imagine how they must feel."
+        }
+      ]
     }
-    ]
+  ]
 }
