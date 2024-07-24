@@ -50,4 +50,4 @@ def get_script(file_path):
 
 
 def replace_(text):
-    return re.sub(r"[?！]", ".", text)
+    return re.sub(r"[?！？!]", ".", text)
