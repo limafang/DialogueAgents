@@ -9,7 +9,7 @@ You can add the following special markers at appropriate positions to help enhan
 Special markers are as follows:
 [laugh]: represents laughter
 [uv_break]: represents a brief pause
-[lbreak]: represents a longer pause
+[lbreak]: represents a longer pause，usually at the end of a sentence
 
 **For different speakers, please wrap the return with <speaker> such html symbols.**
 **You need to follow each speaker's output with <prompt></prompt>**, its content is as follows:
@@ -24,7 +24,7 @@ break_(0-7): This parameter indicates the pauses in the speech. A higher value m
 Original text: Amy happily asked him, "What kind of food do you like, Bob?" Bob replied, "I like cake."
 
 Optimized text:
-<speaker>What kind of food do you like[uv_break]the most[laugh][lbreak]</speaker><prompt>[oral_8][laugh_1][break_2]</prompt><speaker>I like[uv_break]cake</speaker><prompt>[oral_8][laugh_0][break_4]</prompt>
+<speaker>What kind of food do you like[uv_break]the most[laugh][lbreak]</speaker><prompt>[oral_8][laugh_1][break_2]</prompt><speaker>I like[uv_break]cake[lbreak]</speaker><prompt>[oral_8][laugh_0][break_4]</prompt>
 
 ## Given Text
 {text}
@@ -45,7 +45,7 @@ CHINESE_REFINE_PROMPT = """
 特殊标记如下：
 [laugh]：代表笑声
 [uv_break]：代表短暂的停顿
-[lbreak]：代表较长的停顿
+[lbreak]：代表较长的停顿，一般放在句尾
 
 **对于不同的说话人请用<speaker>这样的html符号包裹返回**
 
@@ -59,7 +59,7 @@ break_(0-7)：这个参数表示语音中的停顿。数值越高，句子中的
 
 ## 示例
 原文：Amy高兴地问他：“你喜欢什么类型的食物，bob 回答说，我喜欢蛋糕”
-优化后的文本：<speaker>你最喜欢什么[uv_break]类型食物啊[laugh][lbreak]</speaker><prompt>[oral_8][laugh_1][break_2]</prompt><speaker>我喜欢[uv_break]蛋糕</speaker><prompt>[oral_8][laugh_0][break_4]</prompt>
+优化后的文本：<speaker>你最喜欢什么[uv_break]类型食物啊[laugh][lbreak]</speaker><prompt>[oral_8][laugh_1][break_2]</prompt><speaker>我喜欢[uv_break]蛋糕[lbreak]</speaker><prompt>[oral_8][laugh_0][break_4]</prompt>
 ## 给定文本
 {text}
 ## 任务
