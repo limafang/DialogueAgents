@@ -8,7 +8,7 @@ from cssa.llm.qwen_audio import AudioRefinementBot
 
 if __name__ == "__main__":
     model_path = "/data/xli/speech-agent/ChatTTS/asset/speaker_emb"
-    output_dir = "llm_refine_outputs/"
+    output_dir = "reflaction_output/"
     max_loop = 3
     script_path = "example_data.json"
     processor = ChatTTS_agent(model_path, output_dir)
@@ -17,10 +17,23 @@ if __name__ == "__main__":
     text_batches, speakers = get_script(script_path)
     data = read_json_file(script_path)
     for i, data in enumerate(data["scripts"]):
-        res = llm_bot.predict(CHINESE_REFINE_PROMPT.format(text=data["conversation"]))
+        res = llm_bot.chat(CHINESE_REFINE_PROMPT.format(text=data["conversation"]))
         texts = get_text_inside_tag(res, "speaker")
+        texts = [replace_(m) for m in texts]
         prompts = get_text_inside_tag(res, "prompt")
         processor.run_batch(
             texts, speakers[i], prompts, f"conversation{i}.wav", refine_skip=True
         )
-        res = audio_bot.evaluate_audio(output_dir + f"conversation{i}.wav", EVAL_AUDIO)
+        for j in range(max_loop):
+            eval_res = audio_bot.evaluate_audio(
+                output_dir + f"conversation{i}.wav", EVAL_AUDIO
+            )
+            print(eval_res)
+            res = llm_bot.chat(UPDATE_REFINE_PROMPT.format(advice=eval_res))
+
+            texts = get_text_inside_tag(res, "speaker")
+            texts = [replace_(m) for m in texts]
+            prompts = get_text_inside_tag(res, "prompt")
+            processor.run_batch(
+                texts, speakers[i], prompts, f"conversation{i}.wav", refine_skip=True
+            )

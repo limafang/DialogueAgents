@@ -100,6 +100,7 @@ class ChatTTS_agent:
         subprocess.run(
             [
                 "ffmpeg",
+                "-y",
                 "-f",
                 "concat",
                 "-safe",
