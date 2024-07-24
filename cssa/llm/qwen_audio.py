@@ -1,6 +1,8 @@
 import dashscope
 from dashscope import MultiModalConversation
 
+dashscope.api_key = "sk-2250e5f690cd47afb415002c9164f0f9"
+
 
 class AudioRefinementBot:
     def __init__(self, model_name, system_message=None):
@@ -20,5 +22,5 @@ class AudioRefinementBot:
             temperature=0,
             stream=False,
         )
-        bot_response = response.choices[0].message.content
+        bot_response = response
         return bot_response

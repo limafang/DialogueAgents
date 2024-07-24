@@ -26,6 +26,11 @@ Original text: Amy happily asked him, "What kind of food do you like, Bob?" Bob 
 Optimized text:
 <speaker>What kind of food do you like[uv_break]the most[laugh][lbreak]</speaker><prompt>[oral_8][laugh_1][break_2]</prompt><speaker>I like[uv_break]cake[lbreak]</speaker><prompt>[oral_8][laugh_0][break_4]</prompt>
 
+Original text: Amy高兴地问他：“你喜欢什么类型的食物，bob 回答说，我喜欢蛋糕”
+
+Optimized text:
+<speaker><speaker>你最喜欢什么[uv_break]类型食物啊[laugh][lbreak]</speaker><prompt>[oral_8][laugh_1][break_2]</prompt><speaker>我喜欢[uv_break]蛋糕[lbreak]</speaker><prompt>[oral_8][laugh_0][break_4]</prompt>
+
 ## Given Text
 {text}
 
@@ -52,8 +57,6 @@ CHINESE_REFINE_PROMPT = """
 
 **不要输出阿拉伯数字**
 
-**不要更改语言类型**
-
 **你需要在每个speaker输出完后接上<prompt></prompt>**，它的内容如下：
 '[oral_2][laugh_0][break_6]'
 其中 
@@ -65,13 +68,20 @@ break_(0-7)：这个参数表示语音中的停顿。数值越高，句子中的
 ## 示例
 原文：Amy高兴地问他：“你喜欢什么类型的食物，bob 回答说，我喜欢蛋糕”
 优化后的文本：<speaker>你最喜欢什么[uv_break]类型食物啊[laugh][lbreak]</speaker><prompt>[oral_8][laugh_1][break_2]</prompt><speaker>我喜欢[uv_break]蛋糕[lbreak]</speaker><prompt>[oral_8][laugh_0][break_4]</prompt>
+原文: Amy happily asked him, "What kind of food do you like, Bob?" Bob replied, "I like cake."
+优化后的文本：<speaker>What kind of food do you like[uv_break]the most[laugh][lbreak]</speaker><prompt>[oral_8][laugh_1][break_2]</prompt><speaker>I like[uv_break]cake[lbreak]</speaker><prompt>[oral_8][laugh_0][break_4]</prompt>
 ## 给定文本
 {text}
 ## 任务
 优化给定的文本使其更符合口语的表达，不要返回任何其他词语，修改后的句子中不能出现除逗号，句号外的标点
 """
 
+
 EVAL_AUDIO = """
 上面的音频是由多个音频拼接而成的文件
-请你仔细听这段音频，并一步一步指出其中不自然的地方，返回你的意见
+请你仔细听这段音频，对每个句子从下面的几个维度进行评分
+- 音色自然度：评估音色是否流畅、自然，无明显的机器音。
+- 句子清晰度：判断句子是否清晰可理解，无模糊或无法辨识的单词。
+- 语调自然性：评估句子的语调是否符合语境，无异常的升降调。
+- 噪音和干扰：检查音频中是否有背景噪音或干扰。
 """
