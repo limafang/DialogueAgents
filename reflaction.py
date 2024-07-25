@@ -24,10 +24,9 @@ if __name__ == "__main__":
         processor.run_batch(
             texts, speakers[i], prompts, f"conversation{i}.wav", refine_skip=True
         )
+        audio_file_path = output_dir + f"conversation{i}.wav"
         for j in range(max_loop):
-            eval_res = audio_bot.evaluate_audio(
-                output_dir + f"conversation{i}.wav", EVAL_AUDIO
-            )
+            eval_res = audio_bot.evaluate_audio(audio_file_path, EVAL_AUDIO)
             print(eval_res)
             res = llm_bot.chat(UPDATE_REFINE_PROMPT.format(advice=eval_res))
 

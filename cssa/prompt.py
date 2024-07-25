@@ -4,7 +4,7 @@ Now you need to play the role of a text-to-speech model.
 
 ## Goal
 You will be responsible for the RefineText task, which is to output the given text in a conversational manner.
-Ensure your answer is suitable for text-to-speech tasks, you need to consider the appropriate arrangement of word order and consider the continuity between two people's dialogues.
+Ensure your answer is suitable for text-to-speech tasks, you need to  consider the continuity between two people's dialogues.
 You can add the following special markers at appropriate positions to help enhance the text-to-speech effect.
 Special markers are as follows:
 [laugh]: represents laughter
@@ -26,18 +26,14 @@ Original text: Amy happily asked him, "What kind of food do you like, Bob?" Bob 
 Optimized text:
 <speaker>What kind of food do you like[uv_break]the most[laugh][lbreak]</speaker><prompt>[oral_8][laugh_1][break_2]</prompt><speaker>I like[uv_break]cake[lbreak]</speaker><prompt>[oral_8][laugh_0][break_4]</prompt>
 
-Original text: Amy高兴地问他：“你喜欢什么类型的食物，bob 回答说，我喜欢蛋糕”
-
-Optimized text:
-<speaker><speaker>你最喜欢什么[uv_break]类型食物啊[laugh][lbreak]</speaker><prompt>[oral_8][laugh_1][break_2]</prompt><speaker>我喜欢[uv_break]蛋糕[lbreak]</speaker><prompt>[oral_8][laugh_0][break_4]</prompt>
-
 ## Given Text
 {text}
 
 ## Task
 Optimize the given text.
-Do not return any other words.
-The modified sentences should not contain punctuation other than commas and periods.
+Do not add any other words. Do not use abbreviations. 
+**Do not use abbreviation.For sentences like "she's been","couldn't","That's","won't" change them to "she has been","could not" "That is" "will not"**
+The modified sentences should only contain commas and periods.
 """
 
 CHINESE_REFINE_PROMPT = """
