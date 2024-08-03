@@ -1,10 +1,10 @@
 from cssa.prompt import *
-from cssa.llm.zhipu import zhipullm
+from cssa.llm.zhipu import ZhipuLLM
 from cssa.prompt import *
 from cssa.utils import get_text_inside_tag
-from cssa.agent.tts import ChatTTS_agent
+from cssa.tts.chatTTS import ChatTTS_agent
 from cssa.utils import get_script, read_json_file, replace_
-from cssa.llm.qwen_audio import AudioRefinementBot
+from cssa.audio.qwen import QwenAudio
 
 if __name__ == "__main__":
     model_path = "/data/xli/speech-agent/ChatTTS/asset/speaker_emb"
@@ -12,8 +12,8 @@ if __name__ == "__main__":
     max_loop = 3
     script_path = "example_data.json"
     processor = ChatTTS_agent(model_path, output_dir)
-    llm_bot = zhipullm("glm-4")
-    audio_bot = AudioRefinementBot("qwen-audio-turbo")
+    llm_bot = ZhipuLLM("glm-4")
+    audio_bot = QwenAudio("qwen-audio-turbo")
     text_batches, speakers = get_script(script_path)
     data = read_json_file(script_path)
     for i, data in enumerate(data["scripts"]):

@@ -1,8 +1,8 @@
 from cssa.prompt import *
-from cssa.llm.zhipu import zhipullm
+from cssa.llm.zhipu import ZhipuLLM
 from cssa.prompt import *
 from cssa.utils import get_text_inside_tag
-from cssa.agent.tts import ChatTTS_agent
+from cssa.tts.chatTTS import ChatTTS_agent
 from cssa.utils import get_script, read_json_file, replace_
 
 
@@ -11,7 +11,7 @@ if __name__ == "__main__":
     output_dir = "llm_refine_outputs"
     script_path = "example_data.json"
     processor = ChatTTS_agent(model_path, output_dir)
-    llm_bot = zhipullm("glm-4")
+    llm_bot = ZhipuLLM("glm-4")
     text_batches, speakers = get_script(script_path)
     data = read_json_file(script_path)
     for i, data in enumerate(data["scripts"]):

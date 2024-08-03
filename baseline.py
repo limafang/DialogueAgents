@@ -1,4 +1,4 @@
-from cssa.agent.tts import ChatTTS_agent
+from cssa.tts.chatTTS import ChatTTS_agent
 from cssa.utils import get_script, replace_
 
 
