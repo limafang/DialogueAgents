@@ -1,10 +1,11 @@
 import dashscope
 from dashscope import MultiModalConversation
+from base import BaseAudio
 
 dashscope.api_key = "sk-2250e5f690cd47afb415002c9164f0f9"
 
 
-class AudioRefinementBot:
+class QwenAudio(BaseAudio):
     def __init__(self, model_name, system_message=None):
         self.model_name = model_name
         if system_message is not None:

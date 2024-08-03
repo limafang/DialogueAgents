@@ -6,10 +6,15 @@ import numpy as np
 import pybase16384 as b14
 import ChatTTS
 import subprocess
+from base import BaseTTS
+
+speaker_map = {"A": "seed_speaker_man.pt", "B": "seed_speaker_woman.pt"}
+
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 
-class ChatTTS_agent:
-    def __init__(self, model_path, output_dir, device="cpu"):
+class ChatTTS_agent(BaseTTS):
+    def __init__(self, model_path, output_dir, device="gpu"):
         self.chat = ChatTTS.Chat()
         self.chat.load(compile=True)
         self.model_path = model_path
@@ -37,7 +42,7 @@ class ChatTTS_agent:
         else:
             filename = "seed_speaker_woman.pt"
         path = os.path.join(self.model_path, filename)
-        spk_emb = torch.load(path, map_location=torch.device(self.device)).detach()
+        spk_emb = torch.load(path, map_location=torch.device("cpu")).detach()
         return self.compress_and_encode(spk_emb)
 
     def create_infer_code_params(self, spk_emb_str):
