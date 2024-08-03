@@ -3,11 +3,11 @@ from cssa.utils import get_script, replace_
 
 
 if __name__ == "__main__":
-    model_path = "/data/xli/speech-agent/ChatTTS/asset/speaker_emb"
+    speaker_path = "D:\hkust\CSSA\speaker_emb"  # speaker embedding path
     output_dir = "baseline_outputs"
     script_path = "example_data.json"
     text_batches, speakers = get_script(script_path)
-    processor = ChatTTS_agent(model_path, output_dir)
+    processor = ChatTTS_agent(speaker_path, output_dir)
 
     for i, data in enumerate(text_batches):
         print(data)

@@ -1,5 +1,5 @@
 from zhipuai import ZhipuAI
-from base import BaseLLM
+from .base import BaseLLM
 
 # 填写您自己的APIKey
 client = ZhipuAI(api_key="7c172280522ff372cba10aeb1c67cbd2.6YOBziXCNFnAx1hL")

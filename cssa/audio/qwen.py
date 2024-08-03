@@ -1,6 +1,6 @@
 import dashscope
 from dashscope import MultiModalConversation
-from base import BaseAudio
+from .base import BaseAudio
 
 dashscope.api_key = "sk-2250e5f690cd47afb415002c9164f0f9"
 

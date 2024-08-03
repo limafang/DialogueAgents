@@ -6,7 +6,7 @@ import numpy as np
 import pybase16384 as b14
 import ChatTTS
 import subprocess
-from base import BaseTTS
+from .base import BaseTTS
 
 speaker_map = {"A": "seed_speaker_man.pt", "B": "seed_speaker_woman.pt"}
 
