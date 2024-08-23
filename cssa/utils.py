@@ -49,5 +49,17 @@ def get_script(file_path):
     return text_batches, speakers
 
 
+def save_json(data, file_path):
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+
+
 def replace_(text):
     return re.sub(r"[?！？!]", ".", text)
+
+
+def get_speaker(name):
+    speakers = read_json_file(
+        "/home/hanjiale/hjl/speech/CSSA/data/speaker/speaker.json"
+    )
+    return speakers[name]["label"], speakers[name]["description"], speakers[name]["wav"]

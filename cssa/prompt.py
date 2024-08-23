@@ -4,7 +4,7 @@ Now you need to play the role of a text-to-speech model.
 
 ## Goal
 You will be responsible for the RefineText task, which is to output the given text in a conversational manner.
-Ensure your answer is suitable for text-to-speech tasks, you need to  consider the continuity between two people's dialogues.
+Ensure your answer is suitable for text-to-speech tasks, you need to consider the continuity between two people's dialogues.
 You can add the following special markers at appropriate positions to help enhance the text-to-speech effect.
 Special markers are as follows:
 [laugh]: represents laughter
@@ -34,6 +34,34 @@ Optimize the given text.
 Do not add any other words. Do not use abbreviations. 
 **Do not use abbreviation.For sentences like "she's been","couldn't","That's","won't" change them to "she has been","could not" "That is" "will not"**
 The modified sentences should only contain commas and periods.
+"""
+
+EN_REFINE_PROMPT_v2 = """
+## Role
+Now you need to play the role of a text-to-speech model.
+
+## Goal
+You will be responsible for the RefineText task, which is to output the given text in a conversational manner.
+Ensure your answer is suitable for text-to-speech tasks. You can modify the conversation appropriately to make it flow naturally..
+you can insert <strong></strong> [laughter] [breath] into the text to help enhance the text-to-speech effect.
+where <strong></strong> is responsible for controlling the emphasis. [laughter] [breath] represents laughter and breathing.
+You should be careful when using [laughter], this token can often only be used in very happy scenarios.
+
+**For different speakers, please wrap the return with <speaker> such html symbols.**
+**You need to follow each speaker's output with <prompt></prompt>**, its content represents the speaker's emotions when he said this sentence. Express emotion in one word.**
+**The prompt needs to be in English, while the speaker's statement should be in its source language.**
+
+## Example
+Original text: Amy happily asked him, "What kind of food do you like, Bob?" Bob replied, "I like cake."
+
+Optimized text:
+<speaker>What kind of food do you like, Bob?</speaker><prompt>Excited</prompt><speaker>I like <strong>cake</strong>.</speaker><prompt>straightforward</prompt>
+
+## Given Text
+{text}
+
+## Task
+Optimize the given text.
 """
 
 CHINESE_REFINE_PROMPT = """
@@ -75,18 +103,18 @@ break_(0-7)：这个参数表示语音中的停顿。数值越高，句子中的
 """
 
 UPDATE_REFINE_PROMPT = """
-
 {advice}
 
-如上为对你修改文本后合成音频的反馈意见，请你根据反馈意见再次修改文本，按照之前声明的格式返回
+The above is the feedback on the synthesized audio after you modified the text. 
+Please modify the text again according to the feedback and return it in the format stated before.
 """
 
 
 EVAL_AUDIO = """
-上面的音频是由多个人工合成的音频拼接而成的一段对话
-请你仔细听这段对话，从下面几个维度评估这段对话，并给出提升意见
-- 音色自然度：评估音色是否流畅、自然，无明显的机器音。
-- 对话衔接度，判断对话过渡是否顺畅
-- 句子清晰度：判断句子是否清晰可理解，无模糊或无法辨识的单词。
-- 语调自然性：评估句子的语调是否符合语境，无异常的升降调。
+The audio above is a conversation composed of multiple artificially synthesized audios.
+Please listen to this conversation sentence by sentence, evaluate each sentence in this conversation, evaluate from the following dimensions, and give suggestions for improvement.
+- Naturalness of voice: evaluate whether the conversation is smooth and natural.
+- Conversation cohesion, judge whether the conversation transition is smooth.
+- Sentence clarity: judge whether the sentence is clear and understandable, without vague or unrecognizable words.
+- Naturalness of intonation: evaluate whether the intonation of the sentence is consistent with the context, without abnormal rising and falling tones.
 """
