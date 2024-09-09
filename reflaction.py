@@ -1,9 +1,9 @@
-from cssa.llm.openai import OpenAILLM
-from cssa.prompt import *
-from cssa.tts.cosyTTS import cosyvoice_agent
-from cssa.utils import get_script, replace_,get_speaker,get_text_inside_tag,read_json_file,save_json
+from DA.llm.openai import OpenAILLM
+from DA.prompt import *
+from DA.tts.cosyTTS import cosyvoice_agent
+from DA.utils import get_script, get_speaker, get_text_inside_tag, read_json_file, save_json
 import os
-from cssa.audio.qwen import QwenAudio
+from DA.audio.qwen import QwenAudio
 import argparse
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 

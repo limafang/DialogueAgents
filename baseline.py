@@ -1,5 +1,5 @@
-from cssa.tts.cosyTTS import cosyvoice_agent
-from cssa.utils import get_script,get_speaker
+from DA.tts.cosyTTS import cosyvoice_agent
+from DA.utils import get_script,get_speaker
 import os
 import argparse
 
