@@ -12,21 +12,16 @@ def get_text_inside_tag(html_string: str, tag: str):
 
 
 def read_json_file(file_path):
-    """
-    读取指定路径的JSON文件，并返回其内容。
-    :param file_path: 要读取的JSON文件的路径。
-    :return: 解析JSON文件内容后的Python对象。
-    """
     try:
         with open(file_path, "r", encoding="utf-8") as file:
             data = json.load(file)
             return data
     except FileNotFoundError:
-        print(f"文件未找到: {file_path}")
+        print(f"file not found: {file_path}")
     except json.JSONDecodeError:
-        print(f"JSON文件解析错误: {file_path}")
+        print(f"json edcodeerror: {file_path}")
     except Exception as e:
-        print(f"读取文件时出现错误: {e}")
+        print(f"error: {e}")
 
 
 def get_script(file_path):
@@ -60,6 +55,6 @@ def replace_(text):
 
 def get_speaker(name):
     speakers = read_json_file(
-        "/home/hanjiale/hjl/speech/CSSA/data/speaker/speaker.json"
+        "data/speaker/speaker.json"
     )
     return speakers[name]["label"], speakers[name]["description"], speakers[name]["wav"]
