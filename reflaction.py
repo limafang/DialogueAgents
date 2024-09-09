@@ -8,19 +8,25 @@ import argparse
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 if __name__ == "__main__":
-    max_loop = 1
+    
     parser = argparse.ArgumentParser()
-
     parser.add_argument('--model_path', type=str, required=True, help='model path')
     parser.add_argument('--output_dir', type=str, required=True, help='output file')
     parser.add_argument('--script_path', type=str, required=True, help='script path')
+    parser.add_argument('--max_loop', type=int, required=True, default=1,help='max loop')
     args = parser.parse_args()
+    
     model_path = args.model_path
     output_dir = args.output_dir
     script_path = args.script_path
+    max_loop = args.max_loop
     
     tts = cosyvoice_agent(model_path,output_dir)
-    llm_bot = OpenAILLM("gpt-4o",os.getenv("OPENAI_API_KEY"),base_url="")
+    llm_bot = OpenAILLM(
+        "gpt-4o",
+        os.getenv("OPENAI_API_KEY"),
+        base_url=os.getenv("OPENAI_API_BASE_URL")
+    )
     data = read_json_file(script_path)
     text_batches, speakers = get_script(script_path)
     audio_bot = QwenAudio("your qwen model path")
