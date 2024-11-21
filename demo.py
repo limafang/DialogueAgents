@@ -34,7 +34,7 @@ def parse_arguments():
         "--script_path", type=str, required=True, help="Path to the script file"
     )
     parser.add_argument(
-        "audio_model_path", type=str, help="Path to the audio evaluation model"
+        "--audio_model_path", type=str, help="Path to the audio evaluation model"
     )
     parser.add_argument(
         "--max_loop",
@@ -52,7 +52,7 @@ def initialize_tts(model_path, output_dir):
 def initialize_llm():
     return OpenAILLM(
         "gpt-4o",
-        os.getenv("OPENAI_API_KEY"),
+        api_key=os.getenv("OPENAI_API_KEY"),
         base_url=os.getenv("OPENAI_API_BASE_URL"),
     )
 
@@ -163,11 +163,9 @@ def process_reflection_mode(
 if __name__ == "__main__":
     args = parse_arguments()
     mode = args.mode
-    model_path = args.tts_model_path
+    model_path = args.model_path
     output_dir = args.output_dir
     script_path = args.script_path
-    audio_model_path = args.audio_model_path
-    max_loop = args.max_loop
 
     tts = initialize_tts(model_path, output_dir)
 
@@ -177,6 +175,8 @@ if __name__ == "__main__":
         llm_bot = initialize_llm()
         process_refine_mode(tts, llm_bot, script_path, output_dir)
     elif mode == "reflection":
+        audio_model_path = args.audio_model_path
+        max_loop = args.max_loop
         llm_bot = initialize_llm()
         qwen_audio = initialize_qwen_audio(audio_model_path)
         process_reflection_mode(
