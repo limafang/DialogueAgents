@@ -14,11 +14,11 @@ def custom_path(path):
     sys.path = original_sys_path
 
 
-with custom_path("cssa\CosyVoice"):
+with custom_path("DA/CosyVoice"):
     from cosyvoice.cli.cosyvoice import CosyVoice
     from cosyvoice.utils.file_utils import load_wav
 
-os.environ["PYTHONPATH"] = "cssa/CosyVoice/third_party/Matcha-TTS"
+os.environ["PYTHONPATH"] = "DA/CosyVoice/third_party/Matcha-TTS"
 
 
 class cosyvoice_agent(BaseTTS):
