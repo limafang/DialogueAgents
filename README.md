@@ -1,6 +1,8 @@
 # DialogueAgents: A Hybrid Agent-Based Speech Synthesis Framework for Multi-Party Dialogue
 
-Check our audio samples [here](https://icassp.vercel.app/).
+Our website is available at [https://icassp.vercel.app/](https://icassp.vercel.app/).
+
+Check our dataset [here](https://drive.google.com/file/d/1iiJ6Nc7RTE2kFVZm_mK4-oBvglLeh7DG/view?usp=sharing).
 
 ## 🚀 Quickstart
 ### 1. Clone the Repository
